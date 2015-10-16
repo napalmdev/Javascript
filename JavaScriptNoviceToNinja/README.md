@@ -173,4 +173,72 @@ O comando setAttribute modifica um atributo ou adiciona caso o mesmo não exista
 ###Funções Legadas - .className e .id
 Estas funções legadas do DOM permitem acessar esses atributos diretamente, exemplo:
 
+	<p class="foo" id="bar">showTime</p>
 	
+	var tag = document.getElementsByClassName('foo')[0];
+	tag.id  // bar
+	tag.className //foo
+
+Também podemos utilizar a propriedade **clasName** para alterar a classe do elemento, ex:
+
+	tag.className = "nova-classe";
+
+
+###Propriedade classList
+
+A propriedade **classList** retorna uma lista contendo todas as classes do elemento, ela também pussui alguns métodos para alterar esta lista e afins, ex:
+
+**Add**
+Este método adiciona a classe passada no parâmetro à lista de classes do elemento, ex:
+	
+	tag.classList.add('foobar'); //retorna undefined		
+
+**Remove**
+Este método remove um classe passada no parâmetro da lista de classes do elemento, ex:
+
+	tag.classList.remove('foobar');	//retorna undefined
+
+**Toggle**
+Este método recebe um nome de classe como parâmetro, e caso a classe não exista no elemento		
+
+--------------------------------------------------
+
+#Navegação no DOM
+
+Tendo a referência de um elemento é possível navegar pelo DOM avançando ou voltando nós utilizando o elemento como referência:
+
+<img src="img/dom-tree.jpg" height="200" width="250" alt="">
+
+##Navegação
+
+
+####element.parentNode
+Retorna o elemento pai do elemento em questão
+
+####element.nextSibling
+A **propriedade** nextSibling retornará o próximo nó irmão do elemento em questão caso o mesmo seja o último filho é retornado null.
+
+####element.previousSibling
+A mesma ideia do nextSibling, porém retorna o nó anterior.
+
+
+
+---------------------------------------
+
+#Pegando o valor de um Nó
+
+Uma forma mais complexa de pegar o texto de um elemento, é a seguinte:
+
+```javascript
+	var conteudoTxtNode = elemento.firstChild;
+	var conteudo = conteudoTxtNode.nodeValue;	
+```
+
+Uma forma mais simples de pegar este valor é utilizando a propriedade **textContent**:
+
+```javascript
+	var texto = elemento.textContent;
+```
+**Obs:** A propriedade **textContent** não funciona no IE8 e abaixo, nestes casos pode-se usar a propriedade **innerText** que funciona de forma similar.
+
+
