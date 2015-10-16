@@ -57,25 +57,28 @@ E também as seguintes funções:
  - ####**document.getElementById("ID do Elemento")**
  Retorna uma referência ao elemento buscado que tenha o ID setado no parâmetro da função, se o elemento não existir é retornado null.
 
-	 	document.getElementsById('foo');
-	 	retorna <p id="foo"></p>	
-
+```javascript
+document.getElementsById('foo');
+retorna <p id="foo"></p>	
+```
 
 
  - ####**document.getElementsByTagName("Nome da Tag")**
  Retorna uma **live node list** de todos os elemento da tag informada no parâmetro, ex:
 
-	 	document.getElementsByTagName('p');
-	 	retorna [<p class="foo"></p>, <p class="bar"></p>] 	
-
+```javascript
+document.getElementsByTagName('p');
+retorna [<p class="foo"></p>, <p class="bar"></p>] 	
+```
 
 
  - ####**document.getElementsByClassName("Nome da Classe")**
  Retorna uma **node list** dos elementos que tem o atributo class setado no parâmetro, ex.
 
- 		document.getElementsByClassName('foo-bar');
- 		retorna [<div class="foobar">Testing Class Name</div>]
-
+```javascript
+document.getElementsByClassName('foo-bar');
+retorna [<div class="foobar">Testing Class Name</div>]
+```
 
 
  - ####**document.querySelector("termo de busca")**
@@ -83,17 +86,20 @@ E também as seguintes funções:
  **# = id** 
  **\.  =  class** 
  e assim por diante.
-		
-		document.querySelector("#foo");
-		retorna <div id="foo">retorna do queyselector</div>
+
+```javascript		
+document.querySelector("#foo");
+retorna <div id="foo">retorna do queyselector</div>
+```
 
 
  - ####**document.querySelectorAll("termo de busca")**
  Também utiliza o modelo de query do CSS, porém retorna um **node list** com todas as ocorrências encontradas na busca, ex:
 
-		document.querySelector(".bar");
-		retorna [<div class="bar">retorno 1</div>, <p class="bar">retorno 2</p>]
-
+```javascript
+document.querySelector(".bar");
+retorna [<div class="bar">retorno 1</div>, <p class="bar">retorno 2</p>]
+```
 	
 
 ##Node Lists (Warning)
@@ -107,32 +113,35 @@ Node lists tem um uso parecido com o dos Array porém eles não são Arrays. Por
 ####childNodes
 A propriedade **childNodes** retorna um **node list** de todos os elementos, textos e espaços, que são filhos do elemento utilizado na busca, ex:
 
-	var el = document.getElementById("id-teste");
-	el.childNodes
+```javascript
+var el = document.getElementById("id-teste");
+el.childNodes
 
-	//retorna
-	[#text, <p class="foo"></p>, #text <div class="bar"></div>, #text]
-
+//retorna
+[#text, <p class="foo"></p>, #text <div class="bar"></div>, #text]
+```
 
 ####firstChild
 A propriedade **firstChild** retorna somente o primeiro de todos os elementos, textos e espaços, que são filhos do elemento utilizado na busca, ex:
 
-	var el = document.getElementById("id-teste");
-	el.firstChild
+```javascript
+var el = document.getElementById("id-teste");
+el.firstChild
 
-	//retorna
-	[#text]
-
+//retorna
+[#text]
+```
 
 ####lastChild
 A propriedade **lastChild** retorna somente o último de todos os elementos, textos e espaços, que são filhos do elemento utilizado na busca, ex:
 
-	var el = document.getElementById("id-teste");
-	el.lastChild
+```javascript
+var el = document.getElementById("id-teste");
+el.lastChild
 
-	//retorna
-	[#text]
-
+//retorna
+[#text]
+```
 
 
 
@@ -140,12 +149,13 @@ A propriedade **lastChild** retorna somente o último de todos os elementos, tex
 ####children
 A propriedade **children** retorna um **node list** somente com os **elementos** que são filhos do elemento utilizado na busca, ou seja, espaços e textos não são retornados, ex:
 
-	var el = document.getElementById("id-teste");
-	el.childNodes
+```javascript
+var el = document.getElementById("id-teste");
+el.childNodes
 
-	//retorna
-	[<p class="foo"></p>, <div class="bar"></div>]
-
+//retorna
+[<p class="foo"></p>, <div class="bar"></div>]
+```
 
 ------------------------------------------
 
@@ -158,31 +168,36 @@ O Javascript utiliza as seguintes funções para manipular atributos dos element
 ###getAttribute("atributo");
 Recupera o atributo passado como parâmetro, exemplo:
 
-	var tag = document.getElementById("tag-teste");
-	var attrib = tag.getAttribute("charset");
-	console.log(attrib); //utf-8
-
+```javascript
+var tag = document.getElementById("tag-teste");
+var attrib = tag.getAttribute("charset");
+console.log(attrib); //utf-8
+```
 
 ###setAttribute("atributo", "valor");
 O comando setAttribute modifica um atributo ou adiciona caso o mesmo não exista na tag, exemplo:
 
-	var tag = document.getElementById("tag-teste");
-	tag.setAttribute("class", "container");
-
+```javascript
+var tag = document.getElementById("tag-teste");
+tag.setAttribute("class", "container");
+```
 
 ###Funções Legadas - .className e .id
 Estas funções legadas do DOM permitem acessar esses atributos diretamente, exemplo:
 
-	<p class="foo" id="bar">showTime</p>
-	
-	var tag = document.getElementsByClassName('foo')[0];
-	tag.id  // bar
-	tag.className //foo
+```javascript
+<p class="foo" id="bar">showTime</p>
+
+var tag = document.getElementsByClassName('foo')[0];
+tag.id  // bar
+tag.className //foo
+```
 
 Também podemos utilizar a propriedade **clasName** para alterar a classe do elemento, ex:
 
-	tag.className = "nova-classe";
-
+```javascript
+tag.className = "nova-classe";
+```
 
 ###Propriedade classList
 
@@ -191,15 +206,24 @@ A propriedade **classList** retorna uma lista contendo todas as classes do eleme
 **Add**
 Este método adiciona a classe passada no parâmetro à lista de classes do elemento, ex:
 	
-	tag.classList.add('foobar'); //retorna undefined		
+```javascript
+tag.classList.add('foobar'); //retorna undefined		
+```
 
 **Remove**
 Este método remove um classe passada no parâmetro da lista de classes do elemento, ex:
 
-	tag.classList.remove('foobar');	//retorna undefined
+```javascript
+tag.classList.remove('foobar');	//retorna undefined
+```
 
 **Toggle**
-Este método recebe um nome de classe como parâmetro, e caso a classe não exista no elemento		
+Este método recebe um nome de classe como parâmetro, e caso a classe não exista no elemento
+ele adiciona e retorna true, caso exista, ele remove e retorna false.
+
+```javascript
+tag.classList.toggle('foobar');	//retorna true
+```		
 
 --------------------------------------------------
 
