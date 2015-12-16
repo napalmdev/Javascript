@@ -3,6 +3,23 @@
 	//bem vindo usuario
 	alert("Bem vindo ao Quiz Ninja!");
 
+
+
+	function update (element, content, elClass) {	
+		var p = element.firstChild || document.createElement('p');
+		p.textContent = content;
+		element.appendChild(p);
+		if(elClass) {
+			p.className = elClass;
+		}
+	}
+
+
+	//DOM References //
+	var $question = document.getElementById('question');
+	var $score = document.getElementById('score');
+	var $feedback = document.getElementById('feedback');
+
 	var quizz = {
 		"name": "Quizz dos Super Heróis",
 		"description": "Você sabe o nome de quantos heróis?",
@@ -20,6 +37,11 @@
 	
 
 	function play(quizz) {
+
+		//iniciando scores
+		update($score, score);
+
+
 		//loop principal do jogo
 		var question, answer; 
 
@@ -34,22 +56,25 @@
 		gameOver();	
 		
 		function ask(question) {
-			return prompt(quizz.question + question);
+			update($question, quizz.question + question);
+			return prompt("Digite sua resposta: ");
 		}
 
 
 		function check(answer) {
 			if(answer === quizz.questions[i].answer) {
-				alert("Correto =D");
+				update($feedback, "Correto!", "right");
+				//incrementa o score
 				score++;
+				update($score, score);
 			} else {
-				alert("Errado =(");
+				update($feedback, "Errado!", "wrong");
 			}
 		}
 
 
 		function gameOver() {
-			alert("O jogo terminou, você fez " + score + " pontos");
+			update($question, "O jogo terminou, você fez " + score + " pontos");
 		}
 	}
 
