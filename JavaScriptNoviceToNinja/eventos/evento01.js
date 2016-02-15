@@ -55,3 +55,10 @@ ul.addEventListener('click', function (event) {
 li.addEventListener('click', function (event) {
   console.log('Clicou na LI');
 }, true);
+
+
+
+var tabela = document.getElementById("tabela2");
+tabela.addEventListener('click', function (evento) {
+	console.log("O evento foi disparado pelo elemento " + evento.target);
+});

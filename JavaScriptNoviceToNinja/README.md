@@ -1,4 +1,4 @@
-##ANOTAÇÕES LIVRO JAVASCRIPT NOVICE TO NINJA
+#ANOTAÇÕES JAVASCRIPT NOVICE TO NINJA
 
 #JSON
 
@@ -23,7 +23,7 @@ document.body.nodeType
 
 |Code | Type |
 |-----|------|
-   1  |  element
+   1  | element
    2  |	attribute
    3  |	text
    8  |	comment
@@ -783,4 +783,110 @@ No exemplo acima, será exibida a mensagem **Clicou no LI** e em seguida a propa
 
 #Event Delegation
 
- 
+Event Delegation é utilizado aplicando um Event Listener no elemento pai visando capturar os eventos que ocorrem nos elementos filhos, exemplo:
+
+Imagine uma **tabela** com **100 linhas por 100 colunas**, neste cenário seria muito complicado tratar os eventos ocorridos em cada **<tr>** ou **<td>** por exemplo, neste caso adiciona-se o **Event Listener** no elemento **<table>** e descobrir qual elemento filho chamou o evento através do **event.target**, exemplo:
+
+```html
+	<table id="tabela1">
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+```
+
+```js
+	var tabela = document.getElementById("tabela1");
+	tabela.addEventListener('click', function (event) {
+		console.log("O evento foi disparado pelo elemento " + event.target);
+	});
+```
+
+Este é um método bastante interessante, pois como ele é possível adicionar listener aos elementos adicionados dinamicamente ao DOM, assim que os mesmo entrarem na árvore do objeto ele herdam o listener.
+
+
+----------------------------------------
+
+#Forms
+
+
+Existe mais de uma maneira de recuperar um form de uma página com JS, vaja algumas:
+
+###document.forms[indice]
+Este é um método legado do DOM, ou seja, um método antigo que traz um Array de todos os forms encontrados no documento, e para acessar o form desejado usa-se o acesso pelo índice, exemplo:
+
+```js
+	var form = document.forms[0]; //retorna o primeiro form encontrado declarado no documento
+
+```
+
+
+###document.getElementsByTagname('form')[indice]
+Este método também traz todos os forms do documento em Array, exemplo:
+
+```js
+	var form = document.getElementsByTagname('forms')[0]; //retorna o primeiro form encontrado declarado no documento
+```
+
+
+###Recuperando Form pelo Nome
+
+É possível também identificar um form pelo atributo name:
+
+```js
+	var form = document.forms.search;
+```
+
+**Obs**: Cuidado ao nomear um form e tentar referenciá-lo pelo atributo nome, pois nomes que correspondem a atributos do **Objeto Form**, como **submit** por exemplo, referenciarão à propriedade do form e não ao name que você definiu. 
+
+Para evitar este problema o aconselhável é utilizar as chaves pra referenciar o nome do form, exemplo:
+
+```js
+	var form  = document.forms['formContato']; //retorna o form com name formContato
+```
+
+
+###Recuperando elementos do Form
+O Objeto **Form** possui também um método chamado elements, este método retorna todos os elementos contidos nele em um Array, exemplo:
+
+```js
+   var form = document.forms[0].elements;
+   //retorna [<input type=​"text" name=​"searchBox">​, <button type=​"submit">​Search​</button>​]
+```
+
+Assim como os atributos do form, os elementos também podem ser acessado pelos seus names, também é aconselhável utilizar a notação com colchetes para referenciar os nome, exemplo:
+
+```js
+	var form = document.forms['formContato'];
+	form.elements['email'];
+	//retorna <input type="email" name="email">
+```
+
+
+
+
+##Propriedades e Métodos do Form
+O Objeto **Form** possui métodos e propriedades que podem interagir com o formulário.
+
+####Submit
+O método **form.submit()** irá submeter automaticamente o formulário.Note que utilizando este método não irá ativar o Evento de Submit.
+
+####Reset
+O método **form.reset()** irá resetar todos os valores do form e seus elementos ao estado inicial.
+
+####Action
+Para alterar o destino para o qual o form será enviado pode-se utilizar a propriedade **form.action**.
+
+
+
+
+##Eventos de Formulário
+
+
+
+

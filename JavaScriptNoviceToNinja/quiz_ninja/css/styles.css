@@ -32,3 +32,14 @@ section	p {
 	border:	#900 2px solid;
 	color:	#600;
 }
+
+#start {
+	width: 300px;
+	padding: 10px;
+	font: 18px Arial, Verdana;
+	color: #fff;
+	border: none;
+	background: #0d9;
+	margin: 20px 0 0 10px;
+	border: 1px solid #555;
+}

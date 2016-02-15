@@ -16,9 +16,10 @@
 
 
 	//DOM References //
-	var $question = document.getElementById('question');
-	var $score = document.getElementById('score');
-	var $feedback = document.getElementById('feedback');
+	var $question 	= document.getElementById('question');
+	var $score 		= document.getElementById('score');
+	var $feedback 	= document.getElementById('feedback');
+	var $start 		= document.getElementById('start'); 
 
 	var quizz = {
 		"name": "Quizz dos Super Heróis",
@@ -33,7 +34,7 @@
 
 	var score = 0;
 
-	play(quizz);
+	$start.addEventListener('click', function () { play(quizz); }, false);
 	
 
 	function play(quizz) {
