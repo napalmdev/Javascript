@@ -7,7 +7,7 @@ Clique em um dos livro abaixo para ver as observações sobre os mesmos
 
 | Eloquent Javasctipt| Javascript Novice to Ninja | The Principles of Object Oriented Javascript |
 |--------------------|----------------------------|-----------------------------------------------|
-|[![](img/eloquentjs.jpg)](EloquentJavascript/README.md) |[![](img/oojs.jpg)](ObjectOrientedJavascript/README.md) |[![](img/sitepoint.jpg)](JavascriptNoviceToNinja/README.md)
+| [![](img/eloquentjs.jpg)](EloquentJavascript/README.md) | [![](img/oojs.jpg)](ObjectOrientedJavascript/README.md) | [![](img/sitepoint.jpg)](JavascriptNoviceToNinja/README.md) |
 
 
 # Functions
