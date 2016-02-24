@@ -5,23 +5,10 @@
 Clique em um dos livro abaixo para ver as observações sobre os mesmos
 
 
-#### Eloquent Javasctipt
+| Eloquent Javasctipt| Javascript Novice to Ninja | The Principles of Object Oriented Javascript |
+|--------------------|----------------------------|-----------------------------------------------|
+|[![](img/eloquentjs.jpg)](EloquentJavascript/README.md) |[![](img/oojs.jpg)](ObjectOrientedJavascript/README.md) |[![](img/sitepoint.jpg)](JavascriptNoviceToNinja/README.md)
 
-[![](img/eloquentjs.jpg)](EloquentJavascript/README.md)
-
------------------
-
-#### The Principles of Object Oriented Javascript
-
-[![](img/oojs.jpg)](ObjectOrientedJavascript/README.md)
-
------------------
-
-#### Javascript Novice to Ninja
-
-[![](img/sitepoint.jpg)](JavascriptNoviceToNinja/README.md)
-
------------------
 
 # Functions
 
