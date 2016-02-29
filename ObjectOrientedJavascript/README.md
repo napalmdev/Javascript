@@ -79,7 +79,7 @@ Como em JS praticamente todos os tipos herdam de Object se compararmos utilizand
 ```
 
 ##### typeof
-O typeof somente consegue ser preiso quando se trata de funções, em outros casos normalmente ele identifica como objeto, exemplo:
+O typeof somente consegue ser preciso quando se trata de funções, em outros casos normalmente ele identifica como objeto, exemplo:
 
 ```javascript
   var fn = function () {};
@@ -87,7 +87,7 @@ O typeof somente consegue ser preiso quando se trata de funções, em outros cas
 ```
 
 
-#### Primitive Wrapper Tipes
+#### Primitive Wrapper Types
 Uma das mais confusas partes do Javascript são os empacotadores de tipos primitivos(String, Number, Boolean).
 Eles existem para fazer com que os tipos primitivos trabalhem de forma parecida com Objetos. Eles são criados automaticamente por trás dos panos sempre que um tipo primitivo é lido, e se este tipo precisa utlizar alguma função object-like, os Wrappers entram em ação, exemplo:
 
@@ -155,5 +155,167 @@ O EcmaScript define vários tipos de **propriedades internas** para objetos em J
 A propriedade **[[Call]]** é única para funções, e indica que o objeto pode ser executado. Este é o motivo de o operador **typeof** retornar **"function"** para as funções, ele compara a existência da propriedade **[[Call]]**.
 
 
-###Tipos de Função
+### Tipos de Função
 O JS possui dois tipos básicos de função, a **_function declaration_** e a **_function expression_**. Esse tipos já foram documentados [**aqui**](../README.md).
+
+
+### First-Class Functions
+O JS possui funções de primeira classe, ou seja, você pode utilizar funções como utiliza objetos, atribuindo a variáveis, adicionando-as a objetos, passando-as como argumento de outra função e ainda retorná-las de dentro de qualquer função.
+Por esse motivo as funções são um dos maiores recursos do JS.
+
+
+
+### Sort
+O método **sort()** é uma função padrão dos Array em Javascript, ele tem como objetivo ordenar um array baseado no resultado de uma função passada como _callback_ em sua lista de argmentos, exemplo:
+
+```javascript
+  var numbers = [1, 5, 8, 4, 10, 7, 2, 6];
+  numbers.sort(function ( first, second ) {
+    return first - second;
+  });
+  console.log( numbers ); //[1, 2, 4, 5, 6, 7, 8, 10]
+```
+
+O método **sort()** por padrão converte todos os items do Array em string e realiza a comparação, por isso torna-se necessário passar uma função de callback quando deseja-se ordenar um array de números, se o mesmo array fosse ordenado sem a função de callback o resultado seria esse:
+
+```javascript
+  numbers.sort();
+  console.log( numbers ); //[1, 10, 4, 5, 6, 7, 8]
+```
+Perceba que o 10 passou da última posição do Array para a segunda, isso acontece devido a falta da função de callback, neste caso os itens do Array são tratados como String, e em se tradando de texto o 10 realmente vem depois do 1 nesta comparação.
+
+
+
+### Parameters
+Mais um comportamento único do JS, é que pode-se passar pra uma função qualquer quantidade de argumentos sem causar nenhum erro, isso acontece porque os parâmetros são armazenados em um Objeto array com o nome de **arguments**. O array **arguments** pode crescer e armazenar qualquer número de elementos, os elementos são identificados por índice numérico e ele possui uma propriedade **length** para informar quantos elementos possui.
+O objeto **arguments** é disponibilizado automaticamente para qualquer função. Assim sendo os parâmetros comuns são colocados na lista de argumentos apenas por convenção e boas práticas de ligibilidade de código, mas o Javascript não controla o limite e nem a quantidade dos argumentos informados devido a existência do objeto **arguments**.
+
+**OBS:** *O objeto arguments não é uma instância de Array, e sendo assim, ele não possui os mesmos métodos de Arrays comuns, quando testado com Array.isArray(), ele sempre retorna false.*
+
+#####Exemplo sem e com arguments
+
+```javascript
+  function reflect(value) {
+    return value;
+  }
+  console.log(reflect("Hi!")); // "Hi!"
+  console.log(reflect("Hi!", 25)); // "Hi!"
+  console.log(reflect.length); // 1
+
+
+
+  reflect = function() {
+    return arguments[0];
+  };
+  console.log(reflect("Hi!")); // "Hi!"
+  console.log(reflect("Hi!", 25)); // "Hi!"
+  console.log(reflect.length); //0
+```
+
+Como já foi dito, as funções em Javascript também são objetos, assim sendo elas possuem também a propriedade **length**, e no casso da função esta propriedade informa a quantidade e parâmetros informados na declaração da funçao, na última linha do código acima podemos ver isto acontecendo, como a função *reflect* na segunda implementação não declarou parâmetros, o resultado do console.log na última linha retorna 0.
+
+
+
+### Overloading
+Em outras linguagens como Java e afins, é possível utilizar o Overloading de funções, ou seja, é possível declarar várias funções como o mesmo nome, porém com diferentes assinaturas(numero de argumentos).
+Como em Javascript o número de argumentos não é controlado não há possibilidade de utilizar o Overloading da maneira convencional, porém há forma de "simular" este comportamento das seguintes formas:
+
+1. Verificando o número de argumentos em **_arguments_**:
+
+```javascript
+  function testeOverloading ( message ) {
+    if( arguments.length === 0 ) {
+      message = "Default Message";
+    }
+
+    console.log(message);
+  }
+
+  testeOverloading('Hello World!'); //Hello World!
+  testeOverloading(); //Default Message
+
+```
+
+2. Verificando se determinado argumento é igual a **_undefined_**:
+
+```javascript
+  function testeOverloading ( message ) {
+    if( message === undefined ) {
+      message = "Default Message";
+    }
+
+    console.log(message);
+  }
+
+  testeOverloading('Hello World!'); //Hello World!
+  testeOverloading(); //Default Message
+
+```
+
+**Obs:** Na prática, verificar se o argumento é **_undefined_** é mais utilizado que verificar o **arguments.length**.
+
+
+###Object Methods
+
+Para adicionar um método em um objeto, é da mesma forma que adicionar uma propriedade, exemplo:
+
+```javascript
+  var ob1 = {
+    prop1: 'Hatuna Matata',
+    digaHatuna: function () {
+      console.log(ob1.prop1 + ' é lindo dizer')
+    }
+  };
+
+  ob1.digaHatuna; // Hatuna Mata é lindo dizer
+```
+
+
+No exemplo acima há um problema sério, na chamada do console.log a propriedade **prop1** é referenciada utilizando o nome da variável que contém o objeto, isto é problemático por vários motivos, um deles é que toda vez que o nome da variável for alterada, o nome de referência também deve ser alterado, além de ferir os princípios de reuso de código.
+Para lidar com este tipo de problema, em todo escopo em JS existe um objeto **_this_** que representa o objeto que o chama, quando no escopo global, o **_this_** representa o objeto global(**window** em browsers), sendo assim dentro de um objeto é possível referenciar sua propriedades utilizando o **_this_**, exemplo:
+
+```javascript
+  var ob1 = {
+    prop1: 'Hatuna Matata',
+    digaHatuna: function () {
+      console.log(this.prop1 + ' é lindo dizer')
+    }
+  };
+
+  ob1.digaHatuna; // Hatuna Mata é lindo dizer
+```
+
+O código acima faz a mesma coisa do anterior, porém agora ele não está truncado com o nome da variável ou mesmo reutilizar o método em outro objeto, exemplo:
+
+```javascript
+
+  function digaHatuna () {
+    console.log(this.prop1 + ' é lindo dizer');
+  }
+
+  var timao = {
+    prop1: 'Timao, Hatuna Matata',
+    digaHatuna: digaHatuna
+    }
+  };
+
+  var pumba = {
+    prop1: 'Pumba, Hatuna Matata',
+    digaHatuna: digaHatuna
+    }
+  };
+
+  var prop1 = "Variavel Global";
+
+  timao.digaHatuna(); // Timao, Hatuna Matata é lindo dizer
+  pumba.digaHatuna(); // Pumba, Hatuna Matata é lindo dizer
+
+  digaHatuna(); //Variavel Global é lindo dizer
+
+```
+
+Como pode ser visto acima, a função **digaHatuna()** é uma função genérica que utiliza a propriedade **prop1** e dependendo do escopo em que ela é chamada, os valores são alterados, percebe-se pelos objetos **timao** e **pumba** que tem sua propria implementação de **prop1** cada, então quando a função é chamada neste objetos ela imprime que está contido em sua propriedade **prop1**.
+Já no caso da última linha, a função **digaHatuna()** é invocada diretamente sem estar ligada a nenhum objeto, neste tipo de caso o escopo ao qual ela obedecerá é o escopo Global, e como a **variável prop1** foi definida no Escopo Global(ela não está contida em nenhuma função), o valor de **digaHatuna()** será o da variável **prop1**.
+
+###Alterando o *this*
+Apesar de **this** ser definido automaticamente, é possível alterar seu valor para alcançar diferentes objetivos. Há três métodos que permitem alterar o valor de **this**, são eles **call()**, **apply()** e **bind()**.
