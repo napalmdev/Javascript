@@ -255,7 +255,7 @@ Como em Javascript o número de argumentos não é controlado não há possibili
 **Obs:** Na prática, verificar se o argumento é **_undefined_** é mais utilizado que verificar o **arguments.length**.
 
 
-###Object Methods
+### Object Methods
 
 Para adicionar um método em um objeto, é da mesma forma que adicionar uma propriedade, exemplo:
 
@@ -317,5 +317,92 @@ O código acima faz a mesma coisa do anterior, porém agora ele não está trunc
 Como pode ser visto acima, a função **digaHatuna()** é uma função genérica que utiliza a propriedade **prop1** e dependendo do escopo em que ela é chamada, os valores são alterados, percebe-se pelos objetos **timao** e **pumba** que tem sua propria implementação de **prop1** cada, então quando a função é chamada neste objetos ela imprime que está contido em sua propriedade **prop1**.
 Já no caso da última linha, a função **digaHatuna()** é invocada diretamente sem estar ligada a nenhum objeto, neste tipo de caso o escopo ao qual ela obedecerá é o escopo Global, e como a **variável prop1** foi definida no Escopo Global(ela não está contida em nenhuma função), o valor de **digaHatuna()** será o da variável **prop1**.
 
-###Alterando o *this*
+### Alterando o *this*
 Apesar de **this** ser definido automaticamente, é possível alterar seu valor para alcançar diferentes objetivos. Há três métodos que permitem alterar o valor de **this**, são eles **call()**, **apply()** e **bind()**.
+
+
+
+## call()
+Tanto o método **call()** quanto o **apply()** tem a função de **linkar** uma função qualquer a um contexto específico indicado por ele, a diferença entre os dois métodos está na assinatura do método.
+No método **call()** o primeiro parâmetro é o contexto, e os outros parâmetros são os valores que serão utilizados na função, exemplo:
+
+```javascript
+function digaNomeEContexto (label) {
+  console.log(label + ': ' + this.nome);
+}
+
+
+//definindo os objetos e variavies paa criar contextos diferentes pra this
+var pessoa1 = {
+  nome: "Denis Nunes"  
+};
+
+var pessoa2 = {
+  nome: "João Zuero"  
+};
+
+var name = "Zé da Bota";
+
+//linkando a função aos contextos através de call()
+digaNomeEContexto.call(pessoa1, "Objeto pessoa1"); //Objeto pessoa1: Denis Nunes
+
+digaNomeEContexto.call(pessoa2, "Objeto pessoa2"); //Objeto pessoa2: João Zuero
+
+digaNomeEContexto.call(this, "Contexto Global"); //Contexto Global: Zé da Bota
+
+```
+Como temos visto até agora, em Javascript o valor de **_this_** varia de acordo com o contexto em que ele é chamado, e tanto **call()** quanto **apply()**, fazem exatamente isto, eles fornecem um contexto para o **_this_**.
+No método **call()** após o primeiro parâmetro que é o contexto ser informado, pode informar quantos parâmetros desejar dependendo da função a qual esteja linkando, e todos estes parâmetros deverão ser separados por vírgula.
+
+Se no exemplo acima, também fosse necessário informar o sobrenome, ficaria assim:
+
+```javascript
+function digaNomeEContexto (nome, tipo) {
+  console.log(label + ': Nome = ' + this.nome + '  Tipo = ' + tipo);
+}
+
+//definindo os objetos e variavies paa criar contextos diferentes pra this
+var pessoa1 = {
+  nome: "Denis Nunes"  
+};
+
+digaNomeEContexto.call(pessoa1, "Objeto pessoa1", "Pessoa Fisica"); // Objeto pessoa1: Nome = Denis Nunes  Tipo: Pessoa Fisica
+
+```
+
+## apply()
+A diferença de **apply()** pára **call()** é na forma de passar os parâmetro, no apply(), o primeiro parâmetro é o contexto assim como em **call()**, porém os parâmetros que vem a seguir devem ser informados dentro de um array, se no exemplo citado acima fosse utilizado **apply()**, a chamada ficaria assim:
+
+```javascript
+
+digaNomeEContexto.apply(pessoa1, ["Objeto pessoa1", "Pessoa Fisica"]); // Objeto pessoa1: Nome = Denis Nunes  Tipo: Pessoa Fisica
+
+```
+Perceba que os parâmetros adicionais foram encapsulados dentro de um array.
+
+
+## bind()
+O método **bind()** se comporta de uma forma um pouco diferente dos outros dois, pois ele não executa diretamente, o que ele faz é retornar uma nova função em que o contexto de **this** é que ele informou no primeiro parâmetro na chamada do método, exemplo:
+
+```javascript
+
+function digaNomeEContexto (ctx) {
+  console.log('Contexto = ' + ctx + ' - Nome = ' + this.nome);
+}
+
+var pessoa1 = {
+  nome: "Denis Nunes"
+}
+
+var pessoa2 = {
+  nome: "Michel Nunes"
+}
+
+/*abaixo o bind retorna para variavelBind uma nova função em que this é o contexto de pessoa1
+* ou seja, sempre que variavelBind() for chamada ela referenciara o nome de pessoa1
+* se pessoa1 for excluido ou sua propriedade nome alterada isto afetara diretamente
+* a variavelBind e seu retorno
+*/
+var variavelBind = digaNomeEContexto.bind(pessoa1, 'this de pessoa1');
+variavelBind(); //Contexto = this de pessoa1 - Nome = Denis Nunes
+```
