@@ -406,3 +406,31 @@ var pessoa2 = {
 var variavelBind = digaNomeEContexto.bind(pessoa1, 'this de pessoa1');
 variavelBind(); //Contexto = this de pessoa1 - Nome = Denis Nunes
 ```
+
+
+------------------------------------
+
+##Entendendo Objetos
+
+###Difinindo propriedades
+
+Como visto até agora a implementação de OO no Javascript é um pouco diferente das implementações de linguagens baseadas
+em classes, com objetos tudo se torna mais dinâmico e propriedades podem ser adicionadas, removidas ou modificadas a qualquer momento, vejamos um exemplo utilizando **new Object()** e **Object Literal**:
+
+```javascript
+  //Object Literal
+  var person1 = {
+    name: "Denis"
+  };
+
+  //new Object
+  var person2 = new Object();
+  person2.name = "Denis";
+
+  person1.age = 28;
+  person2.age = 28;
+
+  person1.name = 'Joao';
+  person2.name = 'Zuero';
+
+```
