@@ -410,9 +410,9 @@ variavelBind(); //Contexto = this de pessoa1 - Nome = Denis Nunes
 
 ------------------------------------
 
-##Entendendo Objetos
+## Entendendo Objetos
 
-###Difinindo propriedades
+### Difinindo propriedades
 
 Como visto até agora a implementação de OO no Javascript é um pouco diferente das implementações de linguagens baseadas
 em classes, com objetos tudo se torna mais dinâmico e propriedades podem ser adicionadas, removidas ou modificadas a qualquer momento, vejamos um exemplo utilizando **new Object()** e **Object Literal**:
@@ -433,4 +433,87 @@ em classes, com objetos tudo se torna mais dinâmico e propriedades podem ser ad
   person1.name = 'Joao';
   person2.name = 'Zuero';
 
+```
+
+Quando uma propriedade é adicionada a um objeto, o Javascript utiliza um método interno chamado de [[Put]], este método cria uma lugar no Objeto para armazenar a propriedade. Esta operação especifica não apenas o valor inicial mas também alguns atributos da propriadade. O resultado da chamada do [[Put]] é de criação de uma propriedade própria do Objeto. Um propriedade própria significa que somente a instância específica possui a propriadade.
+
+Propor próprias são diferentes de propriedade de protótipo, que será discutido mais a frente.
+
+Quando um novo valor é definido para uma propriedade existente do objeto, um novo método interno é invocado, este método é o [[Set]], esta operação substitui o valor atual da propriedade por um novo.
+
+
+### Detectando Propriedades
+
+Como propriedades podem ser adicionadas a qualquer hora, as vezes é necessário verificar se uma propriedade existe ou não em um objeto. Desenvolvedores Javascript novatos costumam utilizar padrões incorretos para fazer esta comparação, como no exemplo:
+
+```javascript
+  if(pessoa1.idade) {
+    //faz algo
+  }
+```  
+
+O problema com este padrão é como a **coerção de tipos** em JS afeta o resultado da comparação. A condição **if** em JS compara se um determinado valor é **_truthy_**(um objeto, um String não vazia, um numero não zero, ou true), e avalia como false se o valor é **_falsy_**(null, undefined, 0, false, NaN, ou uma string vazia). Assim, caso o objeto comparado contenha uma propriedade cujo o valor seja algum destes tipos **_falsy_**, o código pode retornar um falso negativo. Se por exemplo o valor de **pessoa.idade** no exemplo acima fosse igual a 0, que é um **_falsy_**, retornaria negativo mesmo que a propriedade exista.
+Uma forma mais confiaável de verificar a existência de uma propriedade é com o operador **in**.
+
+
+O operador **in** procura por um propriedade informada pelo nome em um determinado objeto, e retorna **true** ou **false** caso encontre a propriedade, exemplo usando o objeto pessoa1 criado acima:
+
+```javascript
+  console.log("name" in pessoa1); //true
+  console.log("age" in pessoa1); //true
+  console.log("title" in pessoa1); //false
+```
+Para verificar a existência de métodos em objetos, é a mesma coisa que buscar propriedades.
+
+Em alguns casos porém, é preciso verificar se uma propriedade é somente do objeto, e o operador **in** verifica tanto propriedades que são somnte do objeto, quanto propriedades que pertencem ao **Prototype** do objeto.
+
+E para verificar propriedades que são somente do objeto utiliza-se o método pertencente a todos os objetos **hasOwnProperty()**. Ele retorna true se a propriedade existe e é somente do objeto, exemplo:
+
+```javascript
+  var person1 = {
+    name: "Nicholas",
+    sayName: function () {
+      console.log(this.name);
+    }
+  };
+
+  console.log("name" in person1); //true
+  console.log(person1.hasOwnProperty("name"));  //true
+
+  console.log("toString" in person1); //true
+  console.log(person1.hasOwnProperty("toString"));  //false
+```
+
+Como visto no exemplo acima, quando comparado a uma propriedade específica do objeto(name), ambos retornam **true**, porém quando o método **toString()**, que é pertencente ao Prototype do objeto, a comparação com **in** retona true, e já a comparação com **hasOwnProperty()** retorna false.
+
+### Removendo Propriedades
+Assim como propriedades podem ser adicionadas a qualquer momento em objetos, elas também podem ser removidas, porém simplesmente setar o valor da propriedade como **null** não a remove do objeto, como visto acima a alteração em objeto utiliza o método interno **[[Set]]**, e tudo que ela ferá é alterar o valor da propriedade para **null**.
+
+Para este tipo de ação utiliza-se o operador **delete**, o **delete** funciona com uma única propriedade por vez e o que ele faz é utilizar o método interno **[[Delete]]**. Sua sintaxe é a seguinte:
+
+**delete** objeto.propriedade
+
+E o que ele faz é remover do objeto tanto a chave quanto o valor da propriedade, e retorna **true** independente de a propriedade existir ou não no objeto, exemplo:
+
+```javascript
+  var ob1 = {
+    nome: "Denis Nunes"
+  };
+
+  delete ob1.nome; //true
+  delete ob1.idade; //true
+```
+
+Deletando e verificando a exclusão de uma propriedade:
+
+```javascript
+var pessoa1 = {
+  nome: "Denis"
+};
+
+console.log("nome" in pessoa1); //true
+
+delete pessoa1.nome;  //true
+console.log("nome" in pessoa1); //false
+console.log(pessoa1.nome);  //undefined
 ```
