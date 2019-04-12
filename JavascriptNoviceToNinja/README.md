@@ -1,20 +1,20 @@
-#ANOTAÇÕES JAVASCRIPT NOVICE TO NINJA
+# ANOTAÇÕES JAVASCRIPT NOVICE TO NINJA
 
-#JSON
+# JSON
 
-###JSON.parse(jsonVar);
+### JSON.parse(jsonVar);
 Gera um objeto literal baseado no JSON passado no parâmetro
 
-###JSON.stringify(jsonVar) 
+### JSON.stringify(jsonVar) 
 Gera uma String do JSON passado no parâmetro
 
 
 ---------------------------------------------------
 
 
-#DOM
+# DOM
 
-####Níveis de Nós do DOM
+#### Níveis de Nós do DOM
 Para descobrir o nível de um nó utilizamos a função **nodeType** ex:
 
 ```javascript
@@ -30,23 +30,23 @@ document.body.nodeType
    9  |	document
 
 
-##Pegando elementos do DOM
+## Pegando elementos do DOM
 
 Podemos usar algumas das seguintes propriedades para pegar elementos do DOM
 
-####document.body	
+#### document.body	
  Retorna o elemento body de uma página
 
-####document.images
+#### document.images
  Retorna um **node list** de todas as imagens no documento
 
-####document.links	
+#### document.links	
  Retorna uma **node	list** de todos os elementos <a\> e	<area\> que tem setado um atributo	href.
 
-####document.anchors	
+#### document.anchors	
  Retorna um **node list** de todos os elementos <a\> que tem setado o atributo name.
 
-####document.forms
+#### document.forms
  Retorna um **node list** de todos os forms do documento.	
 
 
@@ -54,7 +54,7 @@ Podemos usar algumas das seguintes propriedades para pegar elementos do DOM
 E também as seguintes funções:
 
 
-####document.getElementById("ID do Elemento")
+#### document.getElementById("ID do Elemento")
  Retorna uma referência ao elemento buscado que tenha o ID setado no parâmetro da função, se o elemento não existir é retornado null.
 
 ```javascript
@@ -63,7 +63,7 @@ retorna <p id="foo"></p>
 ```
 
 
-####document.getElementsByTagName("Nome da Tag")
+#### document.getElementsByTagName("Nome da Tag")
  Retorna uma **live node list** de todos os elemento da tag informada no parâmetro, ex:
 
 ```javascript
@@ -72,7 +72,7 @@ retorna [<p class="foo"></p>, <p class="bar"></p>]
 ```
 
 
-####document.getElementsByClassName("Nome da Classe")
+#### document.getElementsByClassName("Nome da Classe")
  Retorna uma **node list** dos elementos que tem o atributo class setado no parâmetro, ex.
 
 ```javascript
@@ -81,7 +81,7 @@ retorna [<div class="foobar">Testing Class Name</div>]
 ```
 
 
-####document.querySelector("termo de busca")
+#### document.querySelector("termo de busca")
  Retorna a primeira ocorrência do elemento especificado no parâmetro utilizando a busca de elementos do css, ex:
  **# = id** 
  **\.  =  class** 
@@ -93,7 +93,7 @@ retorna <div id="foo">retorna do queyselector</div>
 ```
 
 
-####document.querySelectorAll("termo de busca")
+#### document.querySelectorAll("termo de busca")
  Também utiliza o modelo de query do CSS, porém retorna um **node list** com todas as ocorrências encontradas na busca, ex:
 
 ```javascript
@@ -102,15 +102,15 @@ retorna [<div class="bar">retorno 1</div>, <p class="bar">retorno 2</p>]
 ```
 	
 
-##Node Lists (Warning)
+## Node Lists (Warning)
 Node lists tem um uso parecido com o dos Array porém eles não são Arrays. Por exemplo, como eles pode-se usar a notação de índice ex **document.images[0]**, utilizar a propriedade **length** ex **document.images.length**, porém não é possível usar funções específicas de Array como **.splice**, **.slice** e **.join** por exemplo. 
 
 
 
 
-##Child Nodes
+## Child Nodes
 
-####childNodes
+#### childNodes
 A propriedade **childNodes** retorna um **node list** de todos os elementos, textos e espaços, que são filhos do elemento utilizado na busca, ex:
 
 ```javascript
@@ -121,7 +121,7 @@ el.childNodes
 [#text, <p class="foo"></p>, #text <div class="bar"></div>, #text]
 ```
 
-####firstChild
+#### firstChild
 A propriedade **firstChild** retorna somente o primeiro de todos os elementos, textos e espaços, que são filhos do elemento utilizado na busca, ex:
 
 ```javascript
@@ -132,7 +132,7 @@ el.firstChild
 [#text]
 ```
 
-####lastChild
+#### lastChild
 A propriedade **lastChild** retorna somente o último de todos os elementos, textos e espaços, que são filhos do elemento utilizado na busca, ex:
 
 ```javascript
@@ -146,7 +146,7 @@ el.lastChild
 
 
 
-####children
+#### children
 A propriedade **children** retorna um **node list** somente com os **elementos** que são filhos do elemento utilizado na busca, ou seja, espaços e textos não são retornados, ex:
 
 ```javascript
@@ -160,12 +160,12 @@ el.childNodes
 ------------------------------------------
 
 
-##Recuperando atributos
+## Recuperando atributos
 
 O Javascript utiliza as seguintes funções para manipular atributos dos elementos:
 
 
-###getAttribute("atributo");
+### getAttribute("atributo");
 Recupera o atributo passado como parâmetro, exemplo:
 
 ```javascript
@@ -174,7 +174,7 @@ var attrib = tag.getAttribute("charset");
 console.log(attrib); //utf-8
 ```
 
-###setAttribute("atributo", "valor");
+### setAttribute("atributo", "valor");
 O comando setAttribute modifica um atributo ou adiciona caso o mesmo não exista na tag, exemplo:
 
 ```javascript
@@ -182,7 +182,7 @@ var tag = document.getElementById("tag-teste");
 tag.setAttribute("class", "container");
 ```
 
-###Funções Legadas - .className e .id
+### Funções Legadas - .className e .id
 Estas funções legadas do DOM permitem acessar esses atributos diretamente, exemplo:
 
 ```javascript
@@ -199,7 +199,7 @@ Também podemos utilizar a propriedade **clasName** para alterar a classe do ele
 tag.className = "nova-classe";
 ```
 
-###Propriedade classList (IE10+)
+### Propriedade classList (IE10+)
 
 A propriedade **classList** retorna uma lista contendo todas as classes do elemento, ela também pussui alguns métodos para alterar esta lista e afins, ex:
 
@@ -236,7 +236,7 @@ tag.classList.contains('foobar'); //retorna true
 
 
 
-##Adicionando Classe com função de fallback pra IEs antigos
+## Adicionando Classe com função de fallback pra IEs antigos
 
 ```javascript
 function addClass(element,newClass){
@@ -252,29 +252,29 @@ function addClass(element,newClass){
 
 --------------------------------------------------
 
-#Navegação no DOM
+# Navegação no DOM
 
 Tendo a referência de um elemento é possível navegar pelo DOM avançando ou voltando nós utilizando o elemento como referência:
 
 <img src="img/dom-tree.jpg" height="200" width="250" alt="">
 
-##Navegação
+## Navegação
 
 
-####element.parentNode
+#### element.parentNode
 Retorna o elemento pai do elemento em questão
 
-####element.nextSibling
+#### element.nextSibling
 A **propriedade** nextSibling retornará o próximo nó irmão do elemento em questão caso o mesmo seja o último filho é retornado null.
 
-####element.previousSibling
+#### element.previousSibling
 A mesma ideia do nextSibling, porém retorna o nó anterior.
 
 
 
 ---------------------------------------
 
-#Pegando o valor de um Nó
+# Pegando o valor de um Nó
 
 Uma forma mais complexa de pegar o texto de um elemento, é a seguinte:
 
@@ -294,9 +294,9 @@ Uma forma mais simples de pegar este valor é utilizando a propriedade **textCon
 ------------------------------------------
 
 
-#Adicionando Nó ao final do conteúdo
+# Adicionando Nó ao final do conteúdo
 
-###appendChild(novoElemento);
+### appendChild(novoElemento);
 
 É possível adicionar um nó ao final do conteudo de um elemento, ou seja, fazer um append, exemplo:
 
@@ -309,9 +309,9 @@ Uma forma mais simples de pegar este valor é utilizando a propriedade **textCon
 Como visto acima, o método appendChild deve ser usado no elemento pai.
 
 
-#Adicionando nó antes de algum elemento
+# Adicionando nó antes de algum elemento
 
-###insertBefore(novoElemento, elementoAlvo);
+### insertBefore(novoElemento, elementoAlvo);
 
 Para adicionar um nó antes de qualquer elemento, primeiro é preciso ter a referência do elemento pai e do elemento do qual se deseja inserir o nó antes, e depois utilizar o método **insertBefore()**, exemplo:
 
@@ -325,13 +325,13 @@ Para adicionar um nó antes de qualquer elemento, primeiro é preciso ter a refe
 	topEl.insertBefore(newChild, elReference); 
 ```
 
-####Obs: Os métodos appendChild e insertBefore servem tanto para novos elementos quanto para elementos já existentes na página.
+#### Obs: Os métodos appendChild e insertBefore servem tanto para novos elementos quanto para elementos já existentes na página.
 
 
 
-#Removendo Elemento da página
+# Removendo Elemento da página
 
-###removeChild(elementoAlvo);
+### removeChild(elementoAlvo);
 
 Para remover um elemento da página é necessário utilizar o método **removeChild()**, o método deverá ser chamado no elemento pai, assim como **appendChild()** e **insertBefore()**, exemplo:
 
@@ -344,9 +344,9 @@ Para remover um elemento da página é necessário utilizar o método **removeCh
 
 
 
-#Substituindo elementos
+# Substituindo elementos
 
-###replaceChild(novoElemento, elementoAlvo);
+### replaceChild(novoElemento, elementoAlvo);
 
 Para substituir elementos na página utilizamos o método **replaceChild()**, o método assim como os outros deve ser chamado no elemento pai, exemplo:
 
@@ -361,7 +361,7 @@ Para substituir elementos na página utilizamos o método **replaceChild()**, o 
 
 
 
-##Atualizando CSS
+## Atualizando CSS
 Todo elemento nó tem uma propriedade **style**, com ela é possível alterar dinamicamente o CSS dos elementos, exemplo:
 
 ```javascript
@@ -376,7 +376,7 @@ Todo elemento nó tem uma propriedade **style**, com ela é possível alterar di
 ```
 
 
-##Descobrir estilos aplicados ao elemento
+## Descobrir estilos aplicados ao elemento
 A função **getComputedStyle** traz um vetor com as propriedades CSS aplicadas ao elemento, exemplo:
 
 ```javascript
@@ -396,13 +396,13 @@ A função acima busca o atributo **color** dentro do retorno dos estilos.
 
 ------------------------------------
 
-#Eventos
+# Eventos
 
-###Event Listeners
+### Event Listeners
 
 Event Listeners são os ouvintes de eventos em JS, com eles é possível programar uma função para que esta só ocorra quando o evento acontecer, em vez de ficar validando se algo acontece.
 
-###addEventListener
+### addEventListener
 
 A funçao addEventListener é responsável por criar um ouvinte de evento, sua assinatura é bem simples:
 
@@ -410,7 +410,7 @@ A funçao addEventListener é responsável por criar um ouvinte de evento, sua a
 
 Como ilustrado acima, a função addEventListener deve ser associada a algum elemento, pois assim como variáveis, ouvintes globais não são muito recomendados, seus parâmetros são: Primeiro uma **string** com o tipo do evento e em seguida uma função de callback, esta função pode receber o objeto event caso seja preciso tratar informações do evento dentro do callback, exemplos:
 
-#####Ouvinte comum
+##### Ouvinte comum
 
 ```js
 	var botao = document.getElementById('btn-send');//recupera o elemento do DOM
@@ -420,7 +420,7 @@ Como ilustrado acima, a função addEventListener deve ser associada a algum ele
 ```
 
 
-#####Tratando informação do Evento
+##### Tratando informação do Evento
 
 ```js
 	var botao = document.getElementById('btn-send');//recupera o elemento do DOM
@@ -430,12 +430,12 @@ Como ilustrado acima, a função addEventListener deve ser associada a algum ele
 ```
 
 
-##Propriedades do Evento
+## Propriedades do Evento
 
-###event.type 
+### event.type 
 Retorna o tipo do evento
 
-###event.target 
+### event.target 
 Retorna o elemento que disparou o evento
 
 ```js
@@ -446,7 +446,7 @@ Retorna o elemento que disparou o evento
 ```
 
 
-###event.screenX
+### event.screenX
 Retorna a posição **horizontal** na tela do elemento que disparou o evento, esta posição é calculada da esquerda para a direita.
 
 ```js
@@ -457,7 +457,7 @@ Retorna a posição **horizontal** na tela do elemento que disparou o evento, es
 ```
 
 
-###event.screenY
+### event.screenY
 Retorna a posição **vertical** na tela do elemento que disparou o evento, esta posição é calculada de cima para baixo.
 
 ```js
@@ -468,11 +468,11 @@ Retorna a posição **vertical** na tela do elemento que disparou o evento, esta
 ```
 
 
-###event.pageX/Y
+### event.pageX/Y
 Retorna a posição **horizontal/vertical** na tela do elemento que disparou o evento, esta posição é calculada levando em conta o Scroll da página
 
 
-###event.which
+### event.which
 Retorna qual botão do Mouse ou tecla foi pressionado(a), exemplo:
 ```js
 	var botao = document.getElementById('btn-send');//recupera o elemento do DOM
@@ -483,16 +483,16 @@ Retorna qual botão do Mouse ou tecla foi pressionado(a), exemplo:
 
 
 
-##Tipos de Eventos
+## Tipos de Eventos
 
-#Mouse Events
+# Mouse Events
 Utilizando a variavel botao para os eventos de mouse a seguir
 ```js
 	var botao = document.getElementById('btn-send');//recupera o elemento do DOM
 ```
 
 
-##MouseDown
+## MouseDown
 Evento que ocorre quando o botão do mouse é pressionado antes do evento de click:
 ```js
 	botao.addEventListener('mousedown', function (evento) {
@@ -501,7 +501,7 @@ Evento que ocorre quando o botão do mouse é pressionado antes do evento de cli
 ```
 
 
-##Click
+## Click
 Evento que ocorre quando o botão do mouse é pressionado após o evento de mousedown:
 ```js
 	botao.addEventListener('click', function (evento) {
@@ -510,7 +510,7 @@ Evento que ocorre quando o botão do mouse é pressionado após o evento de mous
 ```
 
 
-##MouseUp
+## MouseUp
 Evento que ocorre quando o botão do mouse é pressionado após o evento de click:
 ```js
 	botao.addEventListener('mouseup', function (evento) {
@@ -519,7 +519,7 @@ Evento que ocorre quando o botão do mouse é pressionado após o evento de clic
 ```
 
 
-##Double Click
+## Double Click
 Evento que ocorre no Double Click no mouse:
 ```js
 	botao.addEventListener('dblclick', function (evento) {
